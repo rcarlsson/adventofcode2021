@@ -17,12 +17,12 @@ fn generate_map(input: &[&str], diagonals: bool) -> VentsMap {
 
     for line in input {
         let coords = parse_line(line);
-        let xdir: i16 = match (coords.0.0, coords.1.0) {
+        let xdir: i16 = match (coords.0 .0, coords.1 .0) {
             (a, b) if b > a => 1,
             (a, b) if b < a => -1,
             _ => 0,
         };
-        let ydir: i16 = match (coords.0.1, coords.1.1) {
+        let ydir: i16 = match (coords.0 .1, coords.1 .1) {
             (a, b) if b > a => 1,
             (a, b) if b < a => -1,
             _ => 0,

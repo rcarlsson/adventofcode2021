@@ -36,7 +36,13 @@ fn part1(nrs: &[&str]) -> u32 {
 
 fn part2(oxygen: &mut Vec<&str>, co2: &mut Vec<&str>) -> u32 {
     for i in 0.. {
-        let ones = oxygen.iter().fold(0, |acc, x| if x.chars().nth(i).unwrap() == '1' { acc + 1} else { acc });
+        let ones = oxygen.iter().fold(0, |acc, x| {
+            if x.chars().nth(i).unwrap() == '1' {
+                acc + 1
+            } else {
+                acc
+            }
+        });
         let zeros = oxygen.len() - ones;
         let most_common = if ones >= zeros { '1' } else { '0' };
         oxygen.retain(|o| o.chars().nth(i).unwrap() == most_common);
@@ -46,7 +52,13 @@ fn part2(oxygen: &mut Vec<&str>, co2: &mut Vec<&str>) -> u32 {
     }
 
     for i in 0.. {
-        let ones = co2.iter().fold(0, |acc, x| if x.chars().nth(i).unwrap() == '1' { acc + 1} else { acc });
+        let ones = co2.iter().fold(0, |acc, x| {
+            if x.chars().nth(i).unwrap() == '1' {
+                acc + 1
+            } else {
+                acc
+            }
+        });
         let zeros = co2.len() - ones;
         let most_common = if ones >= zeros { '0' } else { '1' };
         co2.retain(|c| c.chars().nth(i).unwrap() == most_common);
