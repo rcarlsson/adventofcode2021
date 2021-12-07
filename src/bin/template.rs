@@ -1,5 +1,3 @@
-use std::fs;
-
 fn part1(input: &[&str]) -> u32 {
     0
 }
@@ -9,7 +7,7 @@ fn part2(input: &[&str]) -> u32 {
 }
 
 fn main() {
-    let contents = fs::read_to_string("dayX.input").unwrap();
+    let contents = std::fs::read_to_string("dayX.input").unwrap();
 
     let input: Vec<&str> = contents.split('\n').collect();
 
