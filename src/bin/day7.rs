@@ -12,7 +12,9 @@ fn part2(input: &[i32]) -> i32 {
 
     (min..=max).fold(i32::MAX, |opt, i| {
         opt.min(
-            input.iter().fold(0, |acc, x| acc + arithmetic_sum((x - i).abs()))
+            input
+                .iter()
+                .fold(0, |acc, x| acc + arithmetic_sum((x - i).abs())),
         )
     })
 }
