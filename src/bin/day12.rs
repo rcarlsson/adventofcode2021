@@ -1,66 +1,68 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
-type Links<'a> = HashMap<&'a str, Vec<&'a str>>;
+type Links<'a> = HashMap<&'a str, HashSet<&'a str>>;
 
 fn parse_input<'a>(input: &[&'a str]) -> Links<'a> {
     let mut links: Links<'a> = HashMap::new();
     for line in input {
-        let x: Vec<&str> = line.split('-').collect();
-        if x.len() >= 2 {
-            links.entry(x[0]).or_default().push(x[1]);
-            links.entry(x[1]).or_default().push(x[0]);
+        if let Some((a, b)) = line.split_once('-') {
+            if b != "start" {
+                links.entry(a).or_default().insert(b);
+            }
+            if a != "start" {
+                links.entry(b).or_default().insert(a);
+            }
         }
     }
     links
 }
 
 fn part1(links: &Links) -> usize {
-    let mut paths: Vec<Vec<&str>> = vec![vec!["start"]];
+    let mut paths: Vec<(&str, HashSet<&str>)> = Vec::new();
+    let mut init_set = HashSet::new();
+    init_set.insert("start");
+    paths.push(("start", init_set));
 
-    while !paths.iter().all(|p| p.contains(&"end")) {
-        let mut new_paths: Vec<Vec<&str>> = Vec::new();
-        for p in paths.iter() {
-            if p.contains(&"end") {
-                new_paths.push(p.clone());
-                continue;
-            }
-            for l in &links[p.last().unwrap()] {
-                if **l == l.to_uppercase() || !p.contains(l) {
-                    new_paths.push(p.clone());
-                    new_paths.last_mut().unwrap().push(l);
+    let mut res = 0;
+    while let Some((pos, small)) = paths.pop() {
+        for l in &links[pos] {
+            if *l == "end" {
+                res += 1;
+            } else if !small.contains(l) {
+                let mut new_small = small.clone();
+                if *l == l.to_lowercase() {
+                    new_small.insert(l);
                 }
+                paths.push((l, new_small));
             }
         }
-        paths = new_paths;
     }
-    paths.iter().filter(|p| p.contains(&"end")).count()
+    res
 }
 
 fn part2(links: &Links) -> usize {
-    let mut paths: Vec<(Vec<&str>, bool)> = vec![(vec!["start"], false)];
+    let mut paths: Vec<(&str, HashSet<&str>, bool)> = Vec::new();
+    let mut init_set = HashSet::new();
+    init_set.insert("start");
+    paths.push(("start", init_set, false));
 
-    while !paths.iter().all(|p| p.0.contains(&"end")) {
-        let mut new_paths: Vec<(Vec<&str>, bool)> = Vec::new();
-        for p in paths.iter_mut() {
-            if p.0.contains(&"end") {
-                new_paths.push(p.clone());
-                continue;
-            }
-            for l in links[p.0.last().unwrap()].iter().filter(|x| **x != "start") {
-                if **l == l.to_uppercase()
-                    || !p.1
-                    || !p.0.contains(l)
-                {
-                    let mut new_path = p.0.clone();
-                    let dup_small_cave = p.1 || **l == l.to_lowercase() && new_path.contains(l);
-                    new_path.push(l);
-                    new_paths.push((new_path, dup_small_cave));
+    let mut res = 0;
+    while let Some((pos, small, dup_small)) = paths.pop() {
+        for l in &links[pos] {
+            if *l == "end" {
+                res += 1;
+            } else if !dup_small || !small.contains(l) {
+                let mut new_small = small.clone();
+                let mut new_dup_small = dup_small;
+                if *l == l.to_lowercase() {
+                    new_small.insert(l);
+                    new_dup_small |= small.contains(l);
                 }
+                paths.push((l, new_small, new_dup_small));
             }
         }
-        paths = new_paths;
     }
-    paths.iter().filter(|p| p.0.contains(&"end")).count()
+    res
 }
 
 fn main() {
