@@ -184,8 +184,7 @@ fn main() {
     let input: Vec<&str> = contents.split('\n').collect();
 
     println!("1: {}", part1(&input));
-    println!("2 (fast): {}", part2_fast(&input));
-    println!("2 (slow): {}", part2_slow(&input));
+    println!("2: {}", part2_fast(&input));
 }
 
 #[cfg(test)]
