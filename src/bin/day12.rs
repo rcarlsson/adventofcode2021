@@ -30,7 +30,7 @@ fn part1(links: &Links) -> usize {
                 res += 1;
             } else if !small.contains(l) {
                 let mut new_small = small.clone();
-                if *l == l.to_lowercase() {
+                if l.chars().next().unwrap().is_lowercase() {
                     new_small.insert(l);
                 }
                 paths.push((l, new_small));
@@ -54,7 +54,7 @@ fn part2(links: &Links) -> usize {
             } else if !dup_small || !small.contains(l) {
                 let mut new_small = small.clone();
                 let mut new_dup_small = dup_small;
-                if *l == l.to_lowercase() {
+                if l.chars().next().unwrap().is_lowercase() {
                     new_small.insert(l);
                     new_dup_small |= small.contains(l);
                 }
