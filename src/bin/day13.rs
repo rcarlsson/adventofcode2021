@@ -19,21 +19,20 @@ fn parse_input(input: &[&str]) -> (Dots, Folds) {
 }
 
 fn fold_paper(dots: Dots, fold: (char, u16)) -> Dots {
-    let (xfold, yfold) = if fold.0 == 'x' {
-        (fold.1, u16::MAX)
-    } else {
-        (u16::MAX, fold.1)
-    };
-
     dots.iter()
         .map(|(x, y)| {
-            if *x > xfold {
-                (2 * xfold - *x, *y)
-            } else if *y > yfold {
-                (*x, 2 * yfold - *y)
-            } else {
-                (*x, *y)
-            }
+            (
+                if fold.0 == 'x' && *x > fold.1 {
+                    2 * fold.1 - *x
+                } else {
+                    *x
+                },
+                if fold.0 == 'y' && *y > fold.1 {
+                    2 * fold.1 - *y
+                } else {
+                    *y
+                },
+            )
         })
         .collect()
 }
