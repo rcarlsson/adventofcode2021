@@ -107,7 +107,7 @@ fn parse_input(input: Vec<&str>) -> (Vec<u8>, Vec<Board>) {
 }
 
 fn main() {
-    let contents = fs::read_to_string("day4.input").unwrap();
+    let contents = fs::read_to_string("day04.input").unwrap();
     let input: Vec<&str> = contents.split('\n').collect();
     let (nrs, mut boards) = parse_input(input);
 

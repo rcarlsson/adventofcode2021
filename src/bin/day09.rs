@@ -53,7 +53,7 @@ fn part2(tubes: &Tubes) -> usize {
 }
 
 fn main() {
-    let contents = std::fs::read_to_string("day9.input").unwrap();
+    let contents = std::fs::read_to_string("day09.input").unwrap();
 
     let input: Vec<&str> = contents.split('\n').collect();
     let tubes = parse_input(&input);

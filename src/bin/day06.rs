@@ -1,19 +1,19 @@
 use std::fs;
 
-fn get_fish_count(fishes: &[usize], ndays: usize) -> usize {
+fn get_fish_count(fishes: &[usize], nday0s: usize) -> usize {
     let mut l = [0; 9];
     for (i, r) in l.iter_mut().enumerate() {
         *r = fishes.iter().filter(|x| **x == i).count();
     }
 
-    for d in 0..ndays {
+    for d in 0..nday0s {
         l[(d + 7) % 9] += l[d % 9];
     }
     l.iter().sum()
 }
 
 fn main() {
-    let contents = fs::read_to_string("day6.input").unwrap();
+    let contents = fs::read_to_string("day06.input").unwrap();
 
     let input: Vec<usize> = contents.split(',').map(|s| s.parse().unwrap()).collect();
 

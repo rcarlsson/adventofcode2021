@@ -63,7 +63,7 @@ fn part2(input: &[&str]) -> usize {
 }
 
 fn main() {
-    let contents = fs::read_to_string("day5.input").unwrap();
+    let contents = fs::read_to_string("day05.input").unwrap();
 
     let input: Vec<&str> = contents.split('\n').collect();
 

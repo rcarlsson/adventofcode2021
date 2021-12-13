@@ -179,7 +179,7 @@ fn part2_fast(input: &[&str]) -> usize {
 }
 
 fn main() {
-    let contents = std::fs::read_to_string("day8.input").unwrap();
+    let contents = std::fs::read_to_string("day08.input").unwrap();
 
     let input: Vec<&str> = contents.split('\n').collect();
 

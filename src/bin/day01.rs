@@ -15,7 +15,7 @@ fn part2(input: &[u32]) -> u32 {
 }
 
 fn main() {
-    let contents = fs::read_to_string("day1.input").unwrap();
+    let contents = fs::read_to_string("day01.input").unwrap();
 
     let input: Vec<u32> = contents.split('\n').map(|s| s.parse().unwrap()).collect();
 

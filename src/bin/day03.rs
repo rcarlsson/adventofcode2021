@@ -85,7 +85,7 @@ fn part2(oxygen: &mut Vec<&str>, co2: &mut Vec<&str>) -> u32 {
 }
 
 fn main() {
-    let contents = fs::read_to_string("day3.input").unwrap();
+    let contents = fs::read_to_string("day03.input").unwrap();
 
     let input: Vec<&str> = contents.split('\n').collect();
 

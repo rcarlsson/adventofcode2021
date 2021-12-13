@@ -20,7 +20,7 @@ fn part2(input: &[i32]) -> i32 {
 }
 
 fn main() {
-    let contents = std::fs::read_to_string("day7.input").unwrap();
+    let contents = std::fs::read_to_string("day07.input").unwrap();
 
     let mut input: Vec<i32> = contents.split(',').map(|s| s.parse().unwrap()).collect();
 
