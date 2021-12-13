@@ -1,8 +1,8 @@
-fn part1(input: &[&str]) -> u32 {
+fn part1(_input: &[&str]) -> u32 {
     0
 }
 
-fn part2(input: &[&str]) -> u32 {
+fn part2(_input: &[&str]) -> u32 {
     0
 }
 

@@ -19,6 +19,7 @@ fn part1(input: &[&str]) -> u32 {
     res
 }
 
+#[cfg(test)]
 fn part2_slow(input: &[&str]) -> usize {
     let numbers = [
         vec![0, 1, 2, 4, 5, 6],
